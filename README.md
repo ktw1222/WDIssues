@@ -1,1 +1,1 @@
-# wdi_project_3
+# GA WDI Project 3
