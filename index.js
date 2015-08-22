@@ -1,18 +1,29 @@
+//initialize app
 var express = require("express");
 var app = express();
-
 var path = require("path");
+var bodyParser = require("body-parser");
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// serve public assets
 app.use(express.static("public"));
-// app.use("/", express.static(path.join(__dirname + "/public")));
 
+//load html file
 app.get("/", function(request, response){
   response.sendFile(__dirname + "/app/views/index.html");
 });
 
-// app.get("/", function(req, res){
-//   res.send("Hello world")
-// })
+var postsController = require("./app/controllers/posts")
+
+// Routes
+app.use("/", postsController)
+
+
+
+
+
 
 // The process.env.PORT is for deployment to Heroku. Don't worry about it! You can have the usual:
 /*
