@@ -7,6 +7,8 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+var postsController = require("./app/controllers/posts")
+
 // serve public assets
 app.use(express.static("public"));
 
@@ -15,7 +17,7 @@ app.get("/", function(request, response){
   response.sendFile(__dirname + "/app/views/index.html");
 });
 
-var postsController = require("./app/controllers/posts")
+// var postsController = require("./app/controllers/posts")
 
 // Routes
 app.use("/", postsController)
