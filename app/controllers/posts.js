@@ -9,7 +9,7 @@ function error(response, message){
   response.json({error: message})
 }
 
-// get all Posts route
+// posts#index
 router.get("/posts", function(req, res){
   //get all posts
   Post.findAll().then(function(posts){
@@ -17,7 +17,7 @@ router.get("/posts", function(req, res){
   })
 })
 
-// post to index posts route
+// posts#create
 router.post("/posts", function(req, res){
   console.log(req.body);
   Post.create(req.body).then(function(post){
@@ -25,5 +25,34 @@ router.post("/posts", function(req, res){
   });
 });
 
+// posts#show
+router.get("/posts/:id", function(req, res){
+  Post.findById(req.params.id)
+  .then(function(post){
+    if(!post) return error(res, "not found");
+    res.json(post);
+  });
+});
+
+// posts#update
+router.patch("/posts/:id", function(req, res){
+  Post.findById(req.params.id)
+  .then(function(post){
+    if(!post) return error(res, "not found");
+    post.updateAttributes(req.body).then(function(updatedPost){
+      res.json(updatedPost);
+    });
+  });
+});
+
+// posts#destroy
+router.delete("/posts/:id", function(req, res){
+  Post.findById(req.params.id).then(function(post){
+    if(!post) return error(res, "not found");
+    post.destroy().then(function(){
+      res.json({success: true});
+    });
+  });
+});
 
 module.exports = router
