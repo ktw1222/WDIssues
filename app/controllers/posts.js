@@ -55,12 +55,4 @@ router.delete("/posts/:id", function(req, res){
   });
 });
 
-
-
-// router.get("/posts/:id/comments", function(req, res){
-//   Post.findById(req.params.id).then(function(post){
-//     res.json(post.getComments());
-//   });
-// });
-
 module.exports = router
