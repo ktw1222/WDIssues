@@ -12,10 +12,39 @@ PostView.prototype.render = function(){   //Render methods for postView and comm
   commentsDiv.hide();
   showButton.on("click", function(){
     self.toggleComments(commentsDiv);
+  });
+  editButton.on("click", function(){
+    self.renderEditForm();
   })
 
   $(".posts").append(this.$el);
 };
+
+PostView.prototype.renderEditForm = function(){
+  var self = this;
+  self.$el.html(self.postEditTemplate(self.post));
+  self.$el.find(".updatePost").on("click", function(){
+    self.updatePost();
+  })
+  self.$el.find(".deletePost").on("click", function(){
+    self.post.destroy()
+    .then(function(){
+      self.$el.slideUp();
+    });
+  })
+};
+
+PostView.prototype.updatePost = function(){
+  var self = this;
+  var data = {
+    title: $("input[name=title]").val(),
+    status: $("input[name=status]").val(),
+    body: $("textarea").val()
+  };
+  self.post.update(data).then(function(){
+    self.render();
+  });
+}
 
 PostView.prototype.postTemplate = function(post){ //Think postTemplate shouldn't require an argument
   var html = $("<div>");
@@ -28,6 +57,15 @@ PostView.prototype.postTemplate = function(post){ //Think postTemplate shouldn't
   return (html);
 };
 
+PostView.prototype.postEditTemplate = function(post){
+  var html = $("<div>");
+  html.append("<input name='title' value='"+ post.title +"'><br>");
+  html.append("<input name='status' value='"+ post.status +"'><br>");
+  html.append("<textarea name='body'>" + post.body + "</textarea>"); //figuring how to make this a text box rather than text field
+  html.append("<button class='updatePost'>Update</button>");
+  html.append("<button class='deletePost'>Delete</button>");
+  return (html);
+}
 PostView.prototype.toggleComments = function(commentsDiv){
   var self = this;
   if (commentsDiv.children().length === 0){
@@ -54,4 +92,4 @@ PostView.prototype.toggleButton = function(commentsDiv){
   else {
     commentsDiv.siblings("button.showComments").text("Show Comments");
   }
-}
+};
