@@ -1,8 +1,8 @@
 //Sequilize Model will go here
-module.exports = function(sequelize, Sequelize){
+module.exports = function(sequelize, DataType){
   return sequelize.define("post", {
-    title: Sequelize.STRING,
-    body: Sequelize.TEXT,
-    status: Sequelize.STRING
+    title: DataType.STRING,
+    body: DataType.TEXT,
+    status: DataType.STRING
   });
 }
