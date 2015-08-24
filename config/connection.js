@@ -5,7 +5,7 @@ var sequelize = new Sequelize('postgres://nolds:password@localhost:5432/wdissues
 var Post = sequelize.import("../app/models/post");
 var Comment = sequelize.import("../app/models/comment");
 
-Comment.belongsTo(Post);
+Comment.belongsTo(Post, {onDelete: "CASCADE"});
 Post.hasMany(Comment);
 
 module.exports = {

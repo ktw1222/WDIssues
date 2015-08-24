@@ -19,7 +19,7 @@ router.get("/posts", function(req, res){
 
 // posts#create
 router.post("/posts", function(req, res){
-  console.log(req.body);
+  console.log("Post request body: " + req.body);
   Post.create(req.body).then(function(post){
     res.json(post);
   });
