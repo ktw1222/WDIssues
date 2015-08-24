@@ -32,10 +32,11 @@ Post.create = function(postData){
     return new Post(postData);   //Maybe include some error handling
   })
   return request;
-}
+};
 
 Post.prototype.fetchComments = function(){
-  var url = "/posts/" + this.id + "/comments";
+  var self = this;
+  var url = "/posts/" + self.id + "/comments";
   var request = $.getJSON(url)
   .then(function(response){
     var comments = [];
@@ -47,5 +48,38 @@ Post.prototype.fetchComments = function(){
   .fail(function(response){
     console.log("failed to fetch comments");
   })
+  return request;
+};
+
+Post.prototype.update = function(info){
+  var self = this;
+  var url = "/posts/" + self.id;
+  var request = $.ajax({
+    url: url,
+    method: "patch",
+    data: JSON.stringify(info),
+    contentType: "application/json"
+  })
+  .then(function(updatedPostInfo){
+    console.log(updatedPostInfo);
+    self.reload(updatedPostInfo);
+  })
+  return request;
+};
+
+Post.prototype.reload = function(newData){
+  var self = this;
+  for (var attribute in newData){
+    self[attribute] = newData[attribute];
+  };
+};
+
+Post.prototype.destroy = function(){
+  var self = this;
+  var url = "/posts/" + self.id;
+  var request = $.ajax({
+    url: url,
+    method: "delete"
+  });
   return request;
 }

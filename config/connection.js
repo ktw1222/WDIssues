@@ -6,7 +6,7 @@ var Post = sequelize.import("../app/models/post");
 var Comment = sequelize.import("../app/models/comment");
 
 Comment.belongsTo(Post);
-Post.hasMany(Comment);
+Post.hasMany(Comment, {onDelete: "CASCADE"});
 
 module.exports = {
   sql: Sequelize,
