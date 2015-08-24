@@ -5,8 +5,8 @@ var sequelize = new Sequelize("postgres:///wdissues_db");
 var Post = sequelize.import("../app/models/post");
 var Comment = sequelize.import("../app/models/comment");
 
-Comment.belongsTo(Post);
-Post.hasMany(Comment, {onDelete: "CASCADE"});
+Comment.belongsTo(Post, {onDelete: "CASCADE"});
+Post.hasMany(Comment);
 
 module.exports = {
   sql: Sequelize,
