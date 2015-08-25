@@ -9,7 +9,26 @@
     <h1>WDIssues</h1>
     <div class='posts'></div>
   </body>
+
+  <script id="postTemplate" type="text/x-handlebars-template">
+    <h3>{{ title }}</h3>
+    <p> status: {{ status }}</p>
+    <p>{{ body }}</p>
+    <button class='editPost'>Edit Post</button>
+    <button class='showComments'>Show Comments</button>
+    <div class='comments'></div>
+  </script>
+
+  <script id="postEditTemplate" type="text/x-handlebars-template">
+    <input name='title' value='{{ title }}'><br>
+    <input name='status' value='{{ status }}'><br>
+    <textarea name='body'>{{ body }}</textarea>
+    <button class='updatePost'>Update</button>
+    <button class='deletePost'>Delete</button>
+  </script>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.js"></script>
   <script src="/js/models/post.js"></script>
   <script src="/js/models/comment.js"></script>
   <script src="/js/views/postView.js"></script>

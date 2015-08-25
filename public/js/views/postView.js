@@ -5,7 +5,9 @@ var PostView = function(post){
 
 PostView.prototype.render = function(){   //Render methods for postView and commentView don't match
   var self = this;
+
   self.$el.html(self.postTemplate(self.post));
+
   var showButton = self.$el.find(".showComments");
   var editButton = self.$el.find(".editPost");
   var commentsDiv = self.$el.find(".comments");
@@ -47,24 +49,17 @@ PostView.prototype.updatePost = function(){
 }
 
 PostView.prototype.postTemplate = function(post){ //Think postTemplate shouldn't require an argument
-  var html = $("<div>");
-  html.append("<h3>" + post.title + "</h3>");
-  html.append("<p> status: " + post.status + "</p>")
-  html.append("<p>" + post.body + "</p>");
-  html.append("<button class='editPost'>Edit Post</button>");
-  html.append("<button class='showComments'>Show Comments</button>");
-  html.append("<div class='comments'></div>");
-  return (html);
+  var templateScript = $("#postTemplate").html();
+  var template = Handlebars.compile(templateScript);
+  var html = template(post);
+  return html
 };
 
 PostView.prototype.postEditTemplate = function(post){
-  var html = $("<div>");
-  html.append("<input name='title' value='"+ post.title +"'><br>");
-  html.append("<input name='status' value='"+ post.status +"'><br>");
-  html.append("<textarea name='body'>" + post.body + "</textarea>"); //figuring how to make this a text box rather than text field
-  html.append("<button class='updatePost'>Update</button>");
-  html.append("<button class='deletePost'>Delete</button>");
-  return (html);
+  var templateScript = $('#postEditTemplate').html();
+  var template = Handlebars.compile(templateScript);
+  var html = template(post);
+  return html
 }
 PostView.prototype.toggleComments = function(commentsDiv){
   var self = this;
