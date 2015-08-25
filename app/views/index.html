@@ -7,6 +7,7 @@
   </head>
   <body>
     <h1>WDIssues</h1>
+    <div class="newPost"></div>
     <div class='posts'></div>
   </body>
 
@@ -25,6 +26,14 @@
     <textarea name='body'>{{ body }}</textarea>
     <button class='updatePost'>Update</button>
     <button class='deletePost'>Delete</button>
+  </script>
+
+  <script id="newPostTemplate" type="text/x-handlebars-template">
+    <input name='title'><br>
+    <input name='status'><br>
+    <textarea name='body'></textarea>
+    <button class='createPost'>Create</button>
+    <button class='cancelNewPost'>Cancel</button>
   </script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
