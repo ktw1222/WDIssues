@@ -3,8 +3,8 @@ $(document).ready(function(){
   Post.fetch().then(function(posts){
     posts.forEach(function(post){
       var view = new PostView(post);
-      view.render();
+      //view.render();
     })
   })
-  new newPostView();
+  //new newPostView();
 });

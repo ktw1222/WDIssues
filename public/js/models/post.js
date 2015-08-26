@@ -1,8 +1,10 @@
 var Post = function(info){
-  for (var attribute in info){
-    this[attribute] = info[attribute];
-  };
+  this.title = info.title;
+  this.status = info.status;
+  this.body = info.body;
+  this.id = info.id;
 };
+
 
 Post.fetch = function(){
   var request = $.getJSON("/posts")
