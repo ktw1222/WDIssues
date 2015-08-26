@@ -10,9 +10,17 @@
     <div class='posts'></div>
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
   <script src="/js/models/post.js"></script>
   <script src="/js/models/comment.js"></script>
   <script src="/js/views/postView.js"></script>
   <script src="/js/views/commentView.js"></script>
   <script src="/js/script.js"></script>
+
+
+  <script id="post-template" type="x-handlebars-template">​
+  {{#each this}}​
+   <li class="posts"><a href="/{{title}}">{{title}} -- Body: {{body}} </a></li>​
+   {{/each}}
+​</script> 
 </html>
