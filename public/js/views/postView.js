@@ -3,15 +3,6 @@ var PostView = function(post){
   this.$el = $("<div class='post'></div>");
 };
 
-// PostView.newPost = function(){
-//   var templateScript = $('#newPostTemplate').html();
-//   var template = Handlebars.compile(templateScript);
-//   var html = template();
-//   $(html).find('.createPost').on("click", function(){
-//     console.log("Event fired");
-//   })
-//   $('.newPost').append(html)
-// }
 
 PostView.prototype.render = function(){   //Render methods for postView and commentView don't match
   var self = this;
