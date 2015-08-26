@@ -10,7 +10,6 @@ if (process.env.DATABASE_URL) {
   });
 } else {
   // the application is executed on the local machine
-<<<<<<< HEAD
   sequelize = new Sequelize("postgres:///wdissues_db");
   //sequelize = new Sequelize('postgres://nolds:password@localhost:5432/wdissues_db')
 }

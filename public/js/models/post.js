@@ -36,19 +36,7 @@ Post.create = function(postData){
 
 Post.prototype.fetchComments = function(){
   var self = this;
-  var url = "/posts/" + self.id + "/comments";
-  var request = $.getJSON(url)
-  .then(function(response){
-    var comments = [];
-    for (var i = 0; i < response.length; i++){
-      comments.push(new Comment(response[i]))
-    }
-    return comments;
-  })
-  .fail(function(response){
-    console.log("failed to fetch comments");
-  })
-  return request;
+  return Comment.fetch(self.id);;
 };
 
 Post.prototype.update = function(info){
