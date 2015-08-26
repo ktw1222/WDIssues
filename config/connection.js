@@ -10,14 +10,9 @@ if (process.env.DATABASE_URL) {
   });
 } else {
   // the application is executed on the local machine
-   sequelize = new Sequelize("postgres:///wdissues_db");
-  //  sequelize = new Sequelize('postgres://nolds:password@localhost:5432/wdissues_db')
+  sequelize = new Sequelize("postgres:///wdissues_db");
+  //sequelize = new Sequelize('postgres://nolds:password@localhost:5432/wdissues_db')
 }
-
-
-
-
-
 
 var Post = sequelize.import("../app/models/post");
 var Comment = sequelize.import("../app/models/comment");
