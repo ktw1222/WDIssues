@@ -7,12 +7,47 @@
   </head>
   <body>
     <h1>WDIssues</h1>
+    <div class="newPost"></div>
     <div class='posts'></div>
   </body>
+
+  <script id="postTemplate" type="text/x-handlebars-template">
+    <h3>{{ title }}</h3>
+    <p> status: {{ status }}</p>
+    <p>{{ body }}</p>
+    <button class='editPost'>Edit Post</button>
+    <button class='showComments'>Show Comments</button>
+    <div class='comments'></div>
+  </script>
+
+  <script id="postEditTemplate" type="text/x-handlebars-template">
+    <input name='title' value='{{ title }}'><br>
+    <input name='status' value='{{ status }}'><br>
+    <textarea name='body'>{{ body }}</textarea>
+    <button class='updatePost'>Update</button>
+    <button class='deletePost'>Delete</button>
+  </script>
+
+  <script id="newPostTemplate" type="text/x-handlebars-template">
+    <button class="addPost">Add Post</button>
+    <form class="newPost">
+      <input name='title' placeholder="title"><br>
+      <textarea placeholder="describe issue"></textarea><br>
+      <button class='createPost'>Create Post</button>
+    </form>
+  </script>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.js"></script>
+
   <script src="/js/models/post.js"></script>
   <script src="/js/models/comment.js"></script>
   <script src="/js/views/postView.js"></script>
+  <script src="/js/views/newPostView.js"></script>
   <script src="/js/views/commentView.js"></script>
   <script src="/js/script.js"></script>
+
+
 </html>
