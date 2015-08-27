@@ -1,7 +1,8 @@
 var Comment = function(info){
-  for (var attribute in info){
-    this[attribute] = info[attribute];
-  };
+  this.body = info.body;
+  this.id = info.id
+  // this.author = info.author;
+
 };
 
 Comment.fetch = function(postId){
@@ -20,6 +21,26 @@ Comment.fetch = function(postId){
   return request;
 };
 
-Comment.create = function(post){
-  
+Comment.create = function(commentData){
+  var url = "/posts/" + commentData.postId + "/comments";
+  var request = $.ajax({
+    url: url,
+    method: 'post',
+    data: JSON.stringify(commentData),
+    contentType: "application/json"
+  })
+  .then(function(commentData){
+    return new Comment(commentData);
+  })
+  return request;
+};
+
+Comment.prototype.destroy = function(){
+  var url = "/comments/" + this.id;
+  console.log('deleting comment');
+  var request = $.ajax({
+    url: url,
+    method: 'delete'
+  });
+  return request;
 }

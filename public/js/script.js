@@ -12,6 +12,7 @@ $(document).ready(function(){
       $(".posts").append(view.$el);
     })
   })
+  
   $('button.createPostView').on("click", function(){
     var createPostView = new CreatePostView();
     createPostView.$el.hide();
