@@ -1,5 +1,11 @@
 $(document).ready(function(){
   console.log("jquery works");
+  // ajax request to store currentUser as global variable
+   $.getJSON("/currentUserData", function(userData) {
+      currentUser = userData[0]
+      console.log(currentUser)
+  });
+
   Post.fetch().then(function(posts){
     posts.forEach(function(post){
       var view = new PostView(post);

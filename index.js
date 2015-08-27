@@ -89,6 +89,17 @@ app.get('/auth/github/callback',
     res.redirect('/');
   });
 
+  app.get('/currentUserData', function(req, res) {
+    console.log(req.user);
+    if (req.user === undefined) {
+        // The user is not logged in
+        res.json({ });
+    } else {
+        res.json( req.user );
+    }
+});
+
+
 app.get('/signout', function(req, res){
   console.log(req.user);
   req.session.destroy();
