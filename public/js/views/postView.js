@@ -12,7 +12,7 @@ var PostView = function(post){
 PostView.prototype.template = function(){
   var templateScript = $("#postTemplate").html();
   var template = Handlebars.compile(templateScript);
-  var html = template({post: this.post});
+  var html = template(this.post);
   html = $(html);                            //Make html string a jquery object
   return html;
 };

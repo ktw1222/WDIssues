@@ -1,6 +1,5 @@
 var CreateCommentView = function(postView){
   this.postView = postView;
-  console.log(postView);
   this.$el = this.template();
   this.$elements = {
     textArea: this.$el.find("textArea"),
@@ -16,12 +15,22 @@ CreateCommentView.prototype.template = function(){
   return html
 };
 CreateCommentView.prototype.listen = function(){
-  this.$elements.submitButton.on("click", function(event){
-    console.log("Listening from createCommentView.js");
+  this.$elements.submitButton.on("click", function(){
     this.createComment();
   }.bind(this))
 };
 
 CreateCommentView.prototype.createComment = function(){
+  var data = {
+    body: this.$elements.textArea.val(),
+//    userId: currentUser.id,
+    postId: this.postView.post.id
+  };
 
+  Comment.create(data).then(function(newComment){  //this is doing too much
+    console.log("Listening from createCommentView.js")
+    this.$el.replaceWith();
+    this.postView.$elements.commentsDiv.append(new CommentView(newComment).$el); //gross
+    this.postView.$elements.commentsDiv.append(new CreateCommentView(this.postView).$el)
+  }.bind(this))
 }

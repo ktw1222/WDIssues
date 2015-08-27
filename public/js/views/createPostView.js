@@ -38,8 +38,8 @@ CreatePostView.prototype.createPost = function(){
     };
 
     Post.create(data).then(function(newPost) {
-      this.$el.replaceWith();
-      var view = new PostView(newPost); // create the new artist view (renders)
+      this.$el.replaceWith();              //This clears?
+      var view = new PostView(newPost);    //This should be returned or something, no longer self rendering
     }.bind(this));
 
 };
