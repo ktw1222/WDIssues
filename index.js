@@ -9,6 +9,8 @@ var env = require("./env")
 // Load Passport and Github Strategy
 var passport = require("passport")
 var GitHubStrategy = require("passport-github").Strategy
+var DB = require("./config/connection")
+var User = DB.models.User;
 
 passport.serializeUser(function(user, done) {
   done(null, user)
@@ -22,24 +24,40 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Configure Passport
 passport.use(new GitHubStrategy({
-    clientID: env.consumerKey,
-    clientSecret: env.consumerSecret,
+    clientID: env.clientID,
+    clientSecret: env.clientSecret,
     callbackURL: env.callbackURL
   },
-  function(accessToken, refreshToken, profile, done) {
+  function(accessToken, refreshToken, aProfile, done) {
+    token = accessToken;
+    tokenSecret = refreshToken;
+    profile = aProfile;
+
+    User.findOrCreate({where: {
+      githubId: profile.id,
+      username: profile.displayName
+    }})
+    .then(function(user){
+      return done(null, user);
+    })
    // asynchronous verification, for effect...
-   process.nextTick(function () {
-     return done(null, profile);
-   });
+  //  process.nextTick(function () {
+  //    return done(null, profile);
+  //  });
  }
 ));
-
-app.use(session({ secret: 'keyboard cat' }));
+//app.use(session({secret: 'keyboard cat', resave: false, saveUninitialized: false}));
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(passport.initialize())
 app.use(passport.session())
 
 var postsController = require("./app/controllers/posts");
 var commentsController = require("./app/controllers/comments");
+var usersController = require("./app/controllers/users");
 
 // serve public assets
 app.use(express.static("public"));
@@ -56,6 +74,7 @@ app.get('/test', function(req, res){
 // Routes
 app.use("/", postsController);
 app.use("/", commentsController);
+app.use("/", usersController);
 
 app.get('/auth/github',
   passport.authenticate('github'),
@@ -64,13 +83,18 @@ app.get('/auth/github',
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/test');
+    req.session.token = token;
+    req.session.tokenSecret = tokenSecret;
+    req.session.profile = profile;
+    res.redirect('/');
   });
 
-// The process.env.PORT is for deployment to Heroku. Don't worry about it! You can have the usual:
-/*
-app.listen(3000, function(){
-*/
+app.get('/signout', function(req, res){
+  console.log(req.user);
+  req.session.destroy();
+  console.log(req.user);
+  res.redirect("/");
+})
 
 app.set('port', (process.env.PORT || 3000));
 
