@@ -19,15 +19,21 @@ if (process.env.DATABASE_URL) {
 
 var Post = sequelize.import("../app/models/post");
 var Comment = sequelize.import("../app/models/comment");
+var User = sequelize.import("../app/models/user");
 
 Comment.belongsTo(Post, {onDelete: "CASCADE"});
 Post.hasMany(Comment);
+Post.belongsTo(User);
+User.hasMany(Post);
+Comment.belongsTo(User);
+User.hasMany(Comment);
 
 module.exports = {
   sql: Sequelize,
   do: sequelize,
   models: {
     Post: Post,
-    Comment: Comment
+    Comment: Comment,
+    User: User
   }
 }
