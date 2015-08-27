@@ -8,7 +8,7 @@ var CreateCommentView = function(){
 CreateCommentView.prototype.template = function(){
   var templateScript = $("#createCommentTemplate").html();
   var template = Handlebars.compile(templateScript);
-  var html = template(this.post);
+  var html = template();
   html = $(html);                            //Make html string a jquery object
   return html
 };
