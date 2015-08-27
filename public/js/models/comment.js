@@ -1,6 +1,7 @@
 var Comment = function(info){
   this.body = info.body;
-  this.id = info.id
+  this.id = info.id;
+  this.userId = info.userId;
   // this.author = info.author;
 
 };

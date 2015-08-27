@@ -1,6 +1,6 @@
 var CommentView = function(comment){
   this.comment = comment;
-  this.$el = $("<p>" + this.comment.body + "<button>X</button></p>");
+  this.$el = $("<p>" + this.comment.body + (currentUser && currentUser.id === comment.userId ? "<button>X</button>" : "") +"</p>");
   this.listen();
 };
 

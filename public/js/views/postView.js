@@ -12,7 +12,7 @@ var PostView = function(post){
 PostView.prototype.template = function(){
   var templateScript = $("#postTemplate").html();
   var template = Handlebars.compile(templateScript);
-  var html = template(this.post);
+  var html = template({post: this.post, authorship: (currentUser ? currentUser.id === this.post.userId : null)});
   html = $(html);                            //Make html string a jquery object
   return html;
 };
@@ -39,7 +39,7 @@ PostView.prototype.populateCommentsDiv = function(){
     }.bind(this));
     var createCommentView = new CreateCommentView(this);
     this.$elements.commentsDiv.hide();
-    this.$elements.commentsDiv.append(createCommentView.$el);
+    if (currentUser) this.$elements.commentsDiv.append(createCommentView.$el);
     this.$elements.commentsDiv.slideDown();
     this.$elements.showCommentsButton.text("Hide Comments")
   }.bind(this));
