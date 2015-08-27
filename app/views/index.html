@@ -19,10 +19,14 @@
 
   <script id="postTemplate" type="text/x-handlebars-template">
     <div class='post'>
-      <h3>{{ title }}</h3>
-      <p> status: {{ status }}</p>
-      <p>{{ body }}</p>
+      <h3>{{ post.title }}</h3>
+      <h4>by: {{ post.author }}</h4>
+      <p> status: {{ post.status }}</p>
+      <p>{{ post.body }}</p>
+      <p><span class="glyphicon glyphicon-time"></span> Posted At: {{ post.updatedAt }}</p>
+      {{#if authorship}}
       <button class='editPost'>Edit Post</button>
+      {{/if}}
       <button class='showComments'>Show Comments</button>
       <div class='comments'></div>
     </div>

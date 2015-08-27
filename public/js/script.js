@@ -2,9 +2,13 @@ $(document).ready(function(){
   console.log("jquery works");
   // ajax request to store currentUser as global variable
    $.getJSON("/currentUserData", function(userData) {
-      currentUser = userData[0]
-      console.log(currentUser)
-  });
+      currentUser = userData[0];
+      console.log(currentUser);
+      return currentUser;
+  }).then(function(){
+    console.log(currentUser);
+    if (!currentUser) $('button.createPostView').hide();
+  })
 
   Post.fetch().then(function(posts){
     posts.forEach(function(post){
@@ -12,12 +16,12 @@ $(document).ready(function(){
       $(".posts").append(view.$el);
     })
   })
-  
+
   $('button.createPostView').on("click", function(){
     var createPostView = new CreatePostView();
     createPostView.$el.hide();
     $(".newPost").html(createPostView.$el);
     createPostView.$el.slideDown();
-
   })
+
 });

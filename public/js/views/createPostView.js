@@ -34,12 +34,15 @@ CreatePostView.prototype.createPost = function(){
     var data = {
       title: this.$elements.titleInput.val(),
       status:"open",
-      body: this.$elements.bodyTextArea.val()
+      body: this.$elements.bodyTextArea.val(),
+      userId: currentUser.id,
+      author: currentUser.username
     };
-
     Post.create(data).then(function(newPost) {
-      this.$el.replaceWith();              //This clears?
       var view = new PostView(newPost);    //This should be returned or something, no longer self rendering
+      console.log(view);
+      $('.posts').append(view.$el);
+      this.$el.replaceWith();
     }.bind(this));
 
 };
