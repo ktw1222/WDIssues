@@ -1,27 +1,61 @@
 var PostView = function(post){
   this.post = post;
-  this.$el = $("<div class='post'></div>");
+  this.$el = this.template();
+  this.$elements = {
+    editPostButton: this.$el.find(".editPost"),
+    showCommentsButton: this.$el.find(".showComments"),
+    commentsDiv: this.$el.find(".comments")
+  };
+  this.listen();
 };
 
+PostView.prototype.template = function(){
+  var templateScript = $("#postTemplate").html();
+  var template = Handlebars.compile(templateScript);
+  var html = template(this.post);
+  html = $(html);                            //Make html string a jquery object
+  return html;
+};
 
-PostView.prototype.render = function(){   //Render methods for postView and commentView don't match
-  var self = this;
-
-  self.$el.html(self.postTemplate(self.post));
-
-  var showButton = self.$el.find(".showComments");
-  var editButton = self.$el.find(".editPost");
-  var commentsDiv = self.$el.find(".comments");
-  commentsDiv.hide();
-  showButton.on("click", function(){
-    self.toggleComments(commentsDiv);
-  });
-  editButton.on("click", function(){
-    self.renderEditForm();
-  })
-
+PostView.prototype.render = function(){
   $(".posts").append(this.$el);
 };
+
+PostView.prototype.listen = function(){
+  this.$elements.editPostButton.on("click", function(event){
+    this.renderEditView();
+  }.bind(this));
+  this.$elements.showCommentsButton.on("click", function(event){
+    this.$elements.commentsDiv.is(':empty') ? this.populateCommentsDiv() : this.toggleCommentsDiv()
+  }.bind(this));
+};
+
+PostView.prototype.populateCommentsDiv = function(){
+  this.post.fetchComments()
+  .then(function(comments){
+    comments.forEach(function(comment){
+      var commentView = new CommentView(comment);
+      this.$elements.commentsDiv.append(commentView.$el);
+    }.bind(this));
+    var createCommentView = new CreateCommentView(this);
+    this.$elements.commentsDiv.hide();
+    this.$elements.commentsDiv.append(createCommentView.$el);
+    this.$elements.commentsDiv.slideDown();
+    this.$elements.showCommentsButton.text("Hide Comments")
+  }.bind(this));
+}
+
+PostView.prototype.toggleCommentsDiv = function(){
+  this.$elements.commentsDiv.is(':hidden') ? this.$elements.showCommentsButton.text("Hide Comments") : this.$elements.showCommentsButton.text("Show Comments");
+  this.$elements.commentsDiv.slideToggle()
+}
+
+
+PostView.prototype.renderEditView = function(){
+  console.log("going to render edit view");
+  var editPostView = new EditPostView(this.post);
+  this.$el.replaceWith(editPostView.$el);  //Let's find a less jarring way to transition
+}
 
 PostView.prototype.renderEditForm = function(){
   var self = this;
@@ -49,43 +83,9 @@ PostView.prototype.updatePost = function(){
   });
 }
 
-PostView.prototype.postTemplate = function(post){ //Think postTemplate shouldn't require an argument
-  var templateScript = $("#postTemplate").html();
-  var template = Handlebars.compile(templateScript);
-  var html = template(post);
-  return html
-};
-
 PostView.prototype.postEditTemplate = function(post){
   var templateScript = $('#postEditTemplate').html();
   var template = Handlebars.compile(templateScript);
   var html = template(post);
   return html
 }
-PostView.prototype.toggleComments = function(commentsDiv){
-  var self = this;
-  if (commentsDiv.children().length === 0){
-    self.post.fetchComments()
-    .then(function(comments){
-      self.appendComments(comments, commentsDiv)
-    })
-  }
-  commentsDiv.toggle();
-  self.toggleButton(commentsDiv);
-};
-
-PostView.prototype.appendComments = function(comments, commentsDiv){
-  comments.forEach(function(comment){
-    var commentView = new CommentView(comment);
-    commentsDiv.append(commentView.render());
-  })
-};
-
-PostView.prototype.toggleButton = function(commentsDiv){
-  if (commentsDiv.is(":visible")){
-    commentsDiv.siblings("button.showComments").text("Hide Comments");
-  }
-  else {
-    commentsDiv.siblings("button.showComments").text("Show Comments");
-  }
-};
