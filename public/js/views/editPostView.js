@@ -2,7 +2,7 @@ var EditPostView = function(post){
   this.post = post;
   this.$el = this.template();
   this.$elements = {
-    titleInput: this.$el.find("input[name=title]"), 
+    titleInput: this.$el.find("input[name=title]"),
     statusInput: this.$el.find("input[name=status]"),
     bodyTextArea: this.$el.find("textArea[name=body]"),
     updateButton: this.$el.find(".updatePost"),
@@ -24,7 +24,8 @@ EditPostView.prototype.listen = function(){
     this.updatePost();
   }.bind(this));
   this.$elements.deleteButton.on("click", function(){
-    console.log("listening on delete button from editPostView.js")
+    this.post.destroy();
+    this.$el.slideUp();
   }.bind(this));
 };
 

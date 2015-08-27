@@ -7,7 +7,7 @@ var CreatePostView = function(){
     cancelButton: this.$el.find(".cancel")
   };
   this.listen();
-  this.render();
+  // this.render();
 };
 
 CreatePostView.prototype.render = function(){
@@ -38,11 +38,8 @@ CreatePostView.prototype.createPost = function(){
     };
 
     Post.create(data).then(function(newPost) {
-      self.$el.find("input").val();  // clear the inputs
-      self.$el.find("form").hide();  // hide the form
-
+      this.$el.replaceWith();
       var view = new PostView(newPost); // create the new artist view (renders)
-      view.render();
-    });
+    }.bind(this));
 
 };

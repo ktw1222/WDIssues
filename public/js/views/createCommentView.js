@@ -1,7 +1,10 @@
-var CreateCommentView = function(){
+var CreateCommentView = function(postView){
+  this.postView = postView;
+  console.log(postView);
   this.$el = this.template();
   this.$elements = {
-    submitButton: this.$el.find(".submitComment")
+    textArea: this.$el.find("textArea"),
+    submitButton: this.$el.find(".submitComment"),
   };
   this.listen();
 };
@@ -15,5 +18,10 @@ CreateCommentView.prototype.template = function(){
 CreateCommentView.prototype.listen = function(){
   this.$elements.submitButton.on("click", function(event){
     console.log("Listening from createCommentView.js");
+    this.createComment();
   }.bind(this))
+};
+
+CreateCommentView.prototype.createComment = function(){
+
 }

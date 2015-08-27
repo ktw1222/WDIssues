@@ -7,7 +7,6 @@ var PostView = function(post){
     commentsDiv: this.$el.find(".comments")
   };
   this.listen();
-  this.render();
 };
 
 PostView.prototype.template = function(){
@@ -38,7 +37,7 @@ PostView.prototype.populateCommentsDiv = function(){
       var commentView = new CommentView(comment);
       this.$elements.commentsDiv.append(commentView.$el);
     }.bind(this));
-    var createCommentView = new CreateCommentView();
+    var createCommentView = new CreateCommentView(this);
     this.$elements.commentsDiv.hide();
     this.$elements.commentsDiv.append(createCommentView.$el);
     this.$elements.commentsDiv.slideDown();
@@ -50,6 +49,7 @@ PostView.prototype.toggleCommentsDiv = function(){
   this.$elements.commentsDiv.is(':hidden') ? this.$elements.showCommentsButton.text("Hide Comments") : this.$elements.showCommentsButton.text("Show Comments");
   this.$elements.commentsDiv.slideToggle()
 }
+
 
 PostView.prototype.renderEditView = function(){
   console.log("going to render edit view");
@@ -82,7 +82,6 @@ PostView.prototype.updatePost = function(){
     self.render();
   });
 }
-
 
 PostView.prototype.postEditTemplate = function(post){
   var templateScript = $('#postEditTemplate').html();
