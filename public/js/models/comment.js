@@ -19,3 +19,7 @@ Comment.fetch = function(postId){
   })
   return request;
 };
+
+Comment.create = function(post){
+  
+}

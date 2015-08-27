@@ -3,8 +3,14 @@ $(document).ready(function(){
   Post.fetch().then(function(posts){
     posts.forEach(function(post){
       var view = new PostView(post);
-      view.render();
+      $(".posts").append(view.$el);
     })
   })
-  new newPostView();
+  $('button.createPostView').on("click", function(){
+    var createPostView = new CreatePostView();
+    createPostView.$el.hide();
+    $(".newPost").html(createPostView.$el);
+    createPostView.$el.slideDown();
+
+  })
 });
