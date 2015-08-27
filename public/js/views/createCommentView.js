@@ -23,8 +23,9 @@ CreateCommentView.prototype.listen = function(){
 CreateCommentView.prototype.createComment = function(){
   var data = {
     body: this.$elements.textArea.val(),
-//    userId: currentUser.id,
-    postId: this.postView.post.id
+    postId: this.postView.post.id,
+    userId: currentUser.id,
+    author: currentUser.username
   };
 
   Comment.create(data).then(function(newComment){  //this is doing too much

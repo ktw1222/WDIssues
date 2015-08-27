@@ -3,6 +3,7 @@ module.exports = function(sequelize, DataType){
   return sequelize.define("post", {
     title: DataType.STRING,
     body: DataType.TEXT,
-    status: DataType.STRING
+    status: DataType.STRING,
+    author: DataType.STRING
   });
 }
