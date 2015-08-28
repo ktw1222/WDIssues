@@ -3,7 +3,6 @@ $(document).ready(function(){
   // ajax request to store currentUser as global variable
    $.getJSON("/currentUserData", function(userData) {
       currentUser = userData[0];
-      console.log(currentUser);
       return currentUser;
   }).then(function(){
     console.log(currentUser);

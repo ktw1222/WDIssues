@@ -5,8 +5,8 @@ var EditPostView = function(post){
     titleInput: this.$el.find("input[name=title]"),
     statusInput: this.$el.find("input[name=status]"),
     bodyTextArea: this.$el.find("textArea[name=body]"),
-    updateButton: this.$el.find(".updatePost"),
-    deleteButton: this.$el.find(".deletePost")
+    updateButton: this.$el.find("button.updatePost"),
+    deleteButton: this.$el.find("button.deletePost")
   };
   this.listen();
 };

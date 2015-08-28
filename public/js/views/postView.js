@@ -2,10 +2,11 @@ var PostView = function(post){
   this.post = post;
   this.$el = this.template();
   this.$elements = {
-    editPostButton: this.$el.find(".editPost"),
-    showCommentsButton: this.$el.find(".showComments"),
+    editPostButton: this.$el.find("button.editPost"),
+    showCommentsButton: this.$el.find("button.showComments"),
     commentsDiv: this.$el.find(".comments")
   };
+  console.log("about to listen");
   this.listen();
 };
 
@@ -15,10 +16,6 @@ PostView.prototype.template = function(){
   var html = template({post: this.post, authorship: (currentUser ? currentUser.id === this.post.userId : null)});
   html = $(html);                            //Make html string a jquery object
   return html;
-};
-
-PostView.prototype.render = function(){
-  $(".posts").append(this.$el);
 };
 
 PostView.prototype.listen = function(){
@@ -52,39 +49,13 @@ PostView.prototype.toggleCommentsDiv = function(){
 
 
 PostView.prototype.renderEditView = function(){
-  console.log("going to render edit view");
   var editPostView = new EditPostView(this.post);
+  console.log(editPostView);
   this.$el.replaceWith(editPostView.$el);  //Let's find a less jarring way to transition
 }
 
-PostView.prototype.renderEditForm = function(){
-  var self = this;
-  self.$el.html(self.postEditTemplate(self.post));
-  self.$el.find(".updatePost").on("click", function(){
-    self.updatePost();
-  })
-  self.$el.find(".deletePost").on("click", function(){
-    self.post.destroy()
-    .then(function(){
-      self.$el.slideUp();
-    });
-  })
-};
-
-PostView.prototype.updatePost = function(){
-  var self = this;
-  var data = {
-    title: $("input[name=title]").val(),
-    status: $("input[name=status]").val(),
-    body: $("textarea").val()
-  };
-  self.post.update(data).then(function(){
-    self.render();
-  });
-}
-
 PostView.prototype.postEditTemplate = function(post){
-  var templateScript = $('#postEditTemplate').html();
+  var templateScript = $('#editPostTemplate').html();
   var template = Handlebars.compile(templateScript);
   var html = template(post);
   return html
