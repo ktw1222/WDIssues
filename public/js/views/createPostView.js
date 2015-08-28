@@ -7,7 +7,6 @@ var CreatePostView = function(){
     cancelButton: this.$el.find(".cancel")
   };
   this.listen();
-  // this.render();
 };
 
 CreatePostView.prototype.render = function(){

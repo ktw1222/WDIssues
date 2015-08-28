@@ -5,6 +5,7 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var session = require("express-session")
 var fs = require("fs")
+
 if (fs.existsSync("./env.js")){
  console.log("env.js loaded locally")
  var env = require("./env");
@@ -12,7 +13,6 @@ if (fs.existsSync("./env.js")){
 else {
  var env = process.env;
 }
-
 
 // Load Passport and Github Strategy
 var passport = require("passport")
@@ -28,6 +28,7 @@ passport.deserializeUser(function(obj, done) {
 })
 
 app.use(bodyParser.json());
+app.set("view engine","hbs");
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Configure Passport
@@ -66,9 +67,9 @@ var usersController = require("./app/controllers/users");
 // serve public assets
 app.use(express.static("public"));
 
-//load html file
-app.get("/", function(request, response){
-  response.sendFile(__dirname + "/app/views/index.html");
+//load hbs file
+app.get("/", function(req, res){
+  res.render("index",{user: req.user});
 });
 
 // Routes
