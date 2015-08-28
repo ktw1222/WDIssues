@@ -28,7 +28,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="pull-left" style="margin-right: 15px;">
-                  <img src="/images/GALOGO.png">
+                  <img src="/images/GALOGO.png" alt='GA logo'>
                 </div>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -153,65 +153,65 @@
               <!-- /.row -->
           </footer>
         </div>
+        <script id="postTemplate" type="text/x-handlebars-template">
+          <div class='post'>
+            <h3>{{ post.title }}</h3>
+            <h4>by: {{ post.author }}</h4>
+            <p> status: {{ post.status }}</p>
+            <p>{{ post.body }}</p>
+            <p><span class="glyphicon glyphicon-time"></span> Posted At: {{ post.updatedAt }}</p>
+            {{#if authorship}}
+            <button class='editPost btn btn-primary btn-xs'><span class= 'glyphicon glyphicon-edit'></span>Edit Post</button>
+            {{/if}}
+            <button class='showComments btn btn-primary btn-xs'><span class= 'glyphicon glyphicon-zoom-in'></span> Show Comments</button>
+            <div class='comments'></div>
+          </div>
+        </script>
 
+        <script id="editPostTemplate" type="text/x-handlebars-template">
+          <div class='editPost'>
+            <input name='title' value='{{ title }}'><br>
+            <input name='status' value='{{ status }}'><br>
+            <textarea rows="5" cols="70" name='body'>{{ body }}</textarea>
+            <button class='updatePost btn btn-primary btn-xs'> <span class= 'glyphicon glyphicon-ok'></span>Update</button>
+            <button class='deletePost btn btn-danger btn-xs'>
+              <span class='glyphicon glyphicon-remove'></span>Delete</button>
+          </div>
+        </script>
+
+        <script id="createPostTemplate" type="text/x-handlebars-template">
+          <div class='createPost'>
+            <input name='title' placeholder="Title"><br>
+            <textarea rows="5" cols="70" name='body' placeholder="I wanted... I tried... I expected... the result was..."></textarea>
+            <button class='createPost btn btn-primary btn-xs'>Post</button>
+            <button class='cancel btn btn-danger btn-xs'>Cancel</button>
+          </div>
+        </script>
+
+        <script id="createCommentTemplate" type="text/x-handlebars-template">
+          <div class='createComment'>
+            <textarea rows="5" cols="40" placeholder="Your comment"></textarea>
+            <button class='submitComment btn btn-primary btn-xs'>Comment</button>
+          </div>
+        </script>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.js"></script>
+        <script src="/js/models/post.js"></script>
+        <script src="/js/models/comment.js"></script>
+        <script src="/js/views/postView.js"></script>
+        <script src="/js/views/createPostView.js"></script>
+        <script src="/js/views/editPostView.js"></script>
+        <script src="/js/views/commentView.js"></script>
+        <script src="/js/views/createCommentView.js"></script>
+        <script src="/js/script.js"></script>
+
+        <!-- jQuery -->
+        <!-- <script src="/js/jquery.js"></script> -->
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.min.js"></script>
   </body>
 
-  <script id="postTemplate" type="text/x-handlebars-template">
-    <div class='post'>
-      <h3>{{ post.title }}</h3>
-      <h4>by: {{ post.author }}</h4>
-      <p> status: {{ post.status }}</p>
-      <p>{{ post.body }}</p>
-      <p><span class="glyphicon glyphicon-time"></span> Posted At: {{ post.updatedAt }}</p>
-      {{#if authorship}}
-      <button class='editPost btn btn-primary btn-xs'><span class= 'glyphicon glyphicon-edit'></span>Edit Post</button>
-      {{/if}}
-      <button class='showComments btn btn-primary btn-xs'><span class= 'glyphicon glyphicon-zoom-in'></span> Show Comments</button>
-      <div class='comments'></div>
-    </div>
-  </script>
 
-  <script id="editPostTemplate" type="text/x-handlebars-template">
-    <div class='editPost'>
-      <input name='title' value='{{ title }}'><br>
-      <input name='status' value='{{ status }}'><br>
-      <textarea rows="5" cols="70" name='body'>{{ body }}</textarea>
-      <button class='updatePost btn btn-primary btn-xs'> <span class= 'glyphicon glyphicon-ok'></span>Update</button>
-      <button class='deletePost btn btn-danger btn-xs'>
-        <span class='glyphicon glyphicon-remove'></span>Delete</button>
-    </div>
-  </script>
-
-  <script id="createPostTemplate" type="text/x-handlebars-template">
-    <div class='createPost'>
-      <input name='title' placeholder="Title"><br>
-      <textarea rows="5" cols="70" name='body' placeholder="I wanted... I tried... I expected... the result was..."></textarea>
-      <button class='createPost btn btn-primary btn-xs'>Post</button>
-      <button class='cancel btn btn-danger btn-xs'>Cancel</button>
-    </div>
-  </script>
-
-  <script id="createCommentTemplate" type="text/x-handlebars-template">
-    <div class='createComment'>
-      <textarea rows="5" cols="40" placeholder="Your comment"></textarea>
-      <button class='submitComment btn btn-primary btn-xs'>Comment</button>
-    </div>
-  </script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.js"></script>
-  <script src="/js/models/post.js"></script>
-  <script src="/js/models/comment.js"></script>
-  <script src="/js/views/postView.js"></script>
-  <script src="/js/views/createPostView.js"></script>
-  <script src="/js/views/editPostView.js"></script>
-  <script src="/js/views/commentView.js"></script>
-  <script src="/js/views/createCommentView.js"></script>
-  <script src="/js/script.js"></script>
-
-  <!-- jQuery -->
-  <!-- <script src="/js/jquery.js"></script> -->
-
-  <!-- Bootstrap Core JavaScript -->
-  <script src="/js/bootstrap.min.js"></script>
 </html>
