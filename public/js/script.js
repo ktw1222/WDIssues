@@ -6,15 +6,16 @@ $(document).ready(function(){
       return currentUser;
   }).then(function(){
     console.log(currentUser);
+    Post.fetch().then(function(posts){
+      posts.forEach(function(post){
+        var view = new PostView(post);
+        $(".posts").append(view.$el);
+      })
+    })
     if (!currentUser) $('button.createPostView').hide();
   })
 
-  Post.fetch().then(function(posts){
-    posts.forEach(function(post){
-      var view = new PostView(post);
-      $(".posts").append(view.$el);
-    })
-  })
+
 
   $('button.createPostView').on("click", function(){
     var createPostView = new CreatePostView();

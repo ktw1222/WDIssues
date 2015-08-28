@@ -12,7 +12,7 @@ function error(response, message){
 // posts#index
 router.get("/posts", function(req, res){
   //get all posts
-  Post.findAll().then(function(posts){
+  Post.findAll({order: "id"}).then(function(posts){
     res.json(posts);
   })
 })
