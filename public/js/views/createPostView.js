@@ -20,6 +20,10 @@ CreatePostView.prototype.listen = function(){
   this.$elements.postButton.on("click", function(){
     this.createPost();
   }.bind(this))
+  this.$elements.cancelButton.on("click", function(){
+    this.$el.slideUp();
+    this.$el.replaceWith();
+  }.bind(this))
 }
 
 CreatePostView.prototype.template = function(){

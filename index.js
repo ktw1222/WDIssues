@@ -40,13 +40,9 @@ passport.use(new GitHubStrategy({
     .then(function(user){
       return done(null, user);
     })
-   // asynchronous verification, for effect...
-  //  process.nextTick(function () {
-  //    return done(null, profile);
-  //  });
+
  }
 ));
-//app.use(session({secret: 'keyboard cat', resave: false, saveUninitialized: false}));
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -65,10 +61,6 @@ app.use(express.static("public"));
 //load html file
 app.get("/", function(request, response){
   response.sendFile(__dirname + "/app/views/index.html");
-});
-
-app.get('/test', function(req, res){
-  res.send( req.user );
 });
 
 // Routes
