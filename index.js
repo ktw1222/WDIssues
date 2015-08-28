@@ -4,7 +4,15 @@ var app = express();
 var path = require("path");
 var bodyParser = require("body-parser");
 var session = require("express-session")
-var env = require("./env")
+var fs = require("fs")
+if (fs.existsSync("./env.js")){
+ console.log("env.js loaded locally")
+ var env = require("./env");
+}
+else {
+ var env = process.env;
+}
+
 
 // Load Passport and Github Strategy
 var passport = require("passport")
