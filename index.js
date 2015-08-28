@@ -3,8 +3,8 @@ var express = require("express");
 var app = express();
 var path = require("path");
 var bodyParser = require("body-parser");
-var session = require("express-session")
-var env = require("./env")
+var session = require("express-session");
+var env = require("./env");
 
 // Load Passport and Github Strategy
 var passport = require("passport")
@@ -20,6 +20,7 @@ passport.deserializeUser(function(obj, done) {
 })
 
 app.use(bodyParser.json());
+app.set("view engine","hbs");
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Configure Passport
@@ -59,8 +60,8 @@ var usersController = require("./app/controllers/users");
 app.use(express.static("public"));
 
 //load html file
-app.get("/", function(request, response){
-  response.sendFile(__dirname + "/app/views/index.html");
+app.get("/", function(req, res){
+  res.render("index",{user: req.user});
 });
 
 // Routes
