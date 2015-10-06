@@ -16,18 +16,18 @@ As past and present users of Git issues, we feel there is an opportunity to buil
 (d). Easier for Instructors to divide issues up.
 
 ## General approach you took:
-**Friday(Planning):**
+- **Friday(Planning):**
 Team brainstormed on potential ideas, we researched on projects individually and ended the day by discussing these with the team. Setup a Slack group and Trello project planning folder.(Trello:  https://trello.com/b/kjnoNi94/)
-**Saturday(Planning):**
+- **Saturday(Planning):**
 We continued our discussion from Friday and then decided to go with an application that would handle WDI specific issues, as this was what the team felt most passionate about.
-**Monday(Code day!):**
+- **Monday(Code day!):**
 Started to code. Setup the initial express app, with models and views.
-**Tuesday:**
+- **Tuesday:**
 Deployed!
-**Wednesday:**
+- **Wednesday:**
 Worked on front end models and views. Really felt a frontend framework would have made it easier! Implemented handlebars.
 Thursday: Worked on User model, third party login through GitHub.
-**Friday:**
+- **Friday:**
 Bootstrap. Redeployed, changed URL address. Debugged and cleaned code. Passed HTML & CSS validators.
 
 ##Installation instructions for any dependencies:
@@ -41,5 +41,5 @@ Bootstrap. Redeployed, changed URL address. Debugged and cleaned code. Passed HT
 - Create an env.js file, make sure to export your github client ID and callback URL
 - Open application locally: nodemon
 
-##Descriptions of any unsolved problems or major hurdles your team had to overcome
+##Any unsolved problems or major hurdles
 a. Timeboxing, trying to stay true to accomplish scope.
