@@ -15,6 +15,11 @@ As past and present users of Git issues, we feel there is an opportunity to buil
 (c). Students can view archived issues from previous cohorts
 (d). Easier for Instructors to divide issues up.
 
+##Technologies used
+- Node.js: JavaScript runtime environment, an asynchronous event driven architecture
+- Express.js: a minimal and flexible Node.js web application framework
+- Sequelize: an easy-to-use multi sql dialect ORM for Node.js
+
 ## General approach you took:
 - **Friday(Planning):**
 Team brainstormed on potential ideas, we researched on projects individually and ended the day by discussing these with the team. Setup a Slack group and Trello project planning folder.(Trello:  https://trello.com/b/kjnoNi94/)
